@@ -28,35 +28,31 @@ function socketHTML(html){
   return htmlLines.join('');
 }
 
-let server = http.createServer((req, res)=>{
-  let requestFile = FILE;
-  if(req.url != '/'){
-    requestFile = req.url.substring(1);
-  }
-  fs.readFile(requestFile, 'utf-8',(err, data)=>{
-    if(err) return console.error('Error:', err);
-    if(req.url == '/'){
-      data = socketHTML(data);
+module.exports = function(){
+  // create server first
+  let server = http.createServer((req, res)=>{
+    let requestFile = FILE;
+    if(req.url != '/'){
+      requestFile = req.url.substring(1);
     }
-    // res.writeHead(200, {'Content-Type': 'text/html','Content-Length':data.length});
-    res.write(data);
-    res.end();
+    fs.readFile(requestFile, 'utf-8',(err, data)=>{
+      if(err) return console.error('Error:', err);
+      if(req.url == '/') data = socketHTML(data);
+      // res.writeHead(200, {'Content-Type': 'text/html','Content-Length':data.length});
+      res.write(data);
+      res.end();
+    });
+  })
+  // connect socket to server
+  let io = socket(server);
+  // start watching for changes
+  chokidar.watch(`${FILEPATH}`, {ignored: /(^|[\/\\])\../}).on('change', (path) => {
+      console.log(`Changed ${path}`);
+      io.sockets.emit('file changed');
+    });
+  // and start server
+  server.listen(PORT, (err)=>{
+    if(err) return console.error('Error:', err);
+    console.log(`Listening at ${PORT}`);
   });
-})
-
-let io = socket(server);
-
-io.on('connection', (socket)=>{
-  socket.on('disconnect', ()=>{ console.log('disconnected') })
-  console.log('connected')
-});
-
-chokidar.watch(`${FILEPATH}`, {ignored: /(^|[\/\\])\../}).on('change', (path) => {
-    console.log(`Changed ${path}`);
-    io.sockets.emit('file changed');
-  });
-
-server.listen(PORT, (err)=>{
-  if(err) return console.error('Error:', err);
-  console.log(`Listening at ${PORT}`);
-});
+}

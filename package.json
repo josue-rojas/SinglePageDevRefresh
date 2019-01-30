@@ -3,9 +3,14 @@
   "version": "1.0.0",
   "description": "a node server for quick single page development",
   "main": "index.js",
+  "files": [
+    "index.js",
+    "README.md",
+    "package.json"
+  ],
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon index.js"
+    "start": "nodemon run.js"
   },
   "repository": {
     "type": "git",
