@@ -1,0 +1,27 @@
+{
+  "name": "singlepagedev",
+  "version": "1.0.0",
+  "description": "a node server for quick single page development",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/josuerojasrojas/SinglePageDev.git"
+  },
+  "author": "josuerojasrojas",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/josuerojasrojas/SinglePageDev/issues"
+  },
+  "homepage": "https://github.com/josuerojasrojas/SinglePageDev#readme",
+  "devDependencies": {
+    "nodemon": "^1.18.9"
+  },
+  "dependencies": {
+    "chokidar": "^2.0.4",
+    "socket.io": "^2.2.0"
+  }
+}
