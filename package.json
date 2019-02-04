@@ -1,5 +1,5 @@
 {
-  "name": "singlepagedev",
+  "name": "SinglePageDevRefresh",
   "version": "1.0.0",
   "description": "a node server for quick single page development",
   "main": "index.js",
