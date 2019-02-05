@@ -30,7 +30,11 @@ and on your browser go to http://localhost:8080
 NOTE: There are still some things I need to add, like options for port, files to watch, etc. For now the defaults are Port=8080, and project folder is the one to watch.
 
 #### TODO:
-- cache or save the modified html and only update it if that file changes other wise no need to modify it again when refreshing
 - hot module reload ?!?! (maybe not since this is meant to be straightforward)
 - ignore custom file
 - watch custom path
+- parameters should be added
+  - PORT
+  - FILEPATH
+  - MAIN_HTML
+- error check for readFileSync (in case file doesn't exist);
