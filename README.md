@@ -15,7 +15,7 @@ When going to http://localhost:8080 when active this adds socket.io to the page 
 ### Usage
 ```bash
 # in your project folder
-npm install --save-dev git+https://github.com/josuerojasrojas/SinglePageDevRefresh
+npm install --save-dev singlepagedevrefresh
 ```
 Then in the package.json add to scripts
 ```javascript
