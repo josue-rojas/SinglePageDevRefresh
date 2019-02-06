@@ -1,6 +1,6 @@
 {
   "name": "singlepagedevrefresh",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "a node server for quick single page development",
   "main": "index.js",
   "files": [
@@ -26,7 +26,7 @@
     "nodemon": "^1.18.9"
   },
   "dependencies": {
-    "chokidar": "^2.0.4",
+    "chokidar": "^2.1.0",
     "socket.io": "^2.2.0"
   }
 }
