@@ -1,4 +1,4 @@
-# SinglePageDevRefresh
+# singlepagedevrefresh
 A node server for quick single page development using.
 
 ## About
@@ -19,7 +19,7 @@ npm install --save-dev git+https://github.com/josuerojasrojas/SinglePageDevRefre
 ```
 Then in the package.json add to scripts
 ```javascript
-"watch": "node -e 'require(`SinglePageDevRefresh`)();'"
+"watch": "node -e 'require(`singlepagedevrefresh`)();'"
 ```
 and finally run
 ```bash
