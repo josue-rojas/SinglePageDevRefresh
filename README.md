@@ -49,6 +49,5 @@ require(`singlepagedevrefresh`)({Port: 1010, filePath: '/Users/josuerojasrojas/a
 
 #### TODO:
 - hot module reload ?!?! (maybe not since this is meant to be straightforward)
-- ignore custom file
 - error check for readFileSync (in case file doesn't exist);
 - make custom socket or make socket.io for client local. this is to develop when not online
