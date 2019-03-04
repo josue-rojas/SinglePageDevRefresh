@@ -28,7 +28,8 @@ function socketHTML(html){
   return htmlLines.join('');
 }
 
-function mainFun(Port, filePath, mainHTML){
+module.exports = function ({port, filePath, mainHTML, chokidarOptions} = {}){
+  let OPTIONS = chokidarOptions || {ignored: /(^|[\/\\])\../};
   let PORT = Port || process.env.PORT || 8080;
   let FILEPATH = path.resolve(filePath || '.');
   let MAIN_HTML = mainHTML || 'index.html';
@@ -54,7 +55,7 @@ function mainFun(Port, filePath, mainHTML){
   // connect socket to server
   let io = socket(server);
   // start watching for changes
-  let watcher = chokidar.watch(FILEPATH, {ignored: /(^|[\/\\])\../})
+  let watcher = chokidar.watch(FILEPATH, OPTIONS)
   watcher.on('change', (path) => {
       console.log(`Changed ${path}`);
       if(path == MAIN_HTML_PATH){
@@ -72,5 +73,3 @@ function mainFun(Port, filePath, mainHTML){
     console.log(`Listening at ${PORT}`);
   });
 }
-
-module.exports = mainFun;

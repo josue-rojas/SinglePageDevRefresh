@@ -2,6 +2,7 @@
 // ignore this unless you are dev this thing
 // require('./index.js');
 require('./index.js')();
+// require('./index.js')({filePath: '/Users/josuerojas/Github/test'});
 
 
 // test different filepath

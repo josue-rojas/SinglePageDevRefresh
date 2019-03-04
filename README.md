@@ -12,7 +12,7 @@ I tried a while back to do something without modifying the index.html but I find
 ### How it works
 When going to http://localhost:8080 when active this adds socket.io to the page and also adds a script to refresh the page when there is a change. The backend uses chokidar to watch files and notify of changes.
 
-### Usage
+### Simple Usage
 ```bash
 # in your project folder
 npm install --save-dev singlepagedevrefresh
@@ -27,7 +27,25 @@ npm run watch
 ```
 and on your browser go to http://localhost:8080
 
-NOTE: There are still some things I need to add, like options for port, files to watch, etc. For now the defaults are Port=8080, and project folder is the one to watch.
+### Parameters
+This takes in an object with the following keys (all of them are optional that will fall to their default)
+##### port
+Integer for the port for the server - defaults to 8080
+##### filePath
+String for the path to watch and to serve - defaults to '.'
+##### mainHTML
+String of the main html (index.html) to be served and who will have socket code injected - defaults to 'index.html'
+##### chokidarOptions
+Object for chokidar options: [check here for more info](https://github.com/paulmillr/chokidar#api) - defaults to {ignored: /(^|[\/\\])\../}
+
+### Some Basic examples with Parameters
+```javascript
+// with different port
+require(`singlepagedevrefresh`)({Port: 1010});
+// with different port and different path
+require(`singlepagedevrefresh`)({Port: 1010, filePath: '/Users/josuerojasrojas/anotherdir'});
+// ... and so on
+```
 
 #### TODO:
 - hot module reload ?!?! (maybe not since this is meant to be straightforward)
