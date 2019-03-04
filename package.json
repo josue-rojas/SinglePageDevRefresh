@@ -1,6 +1,6 @@
 {
   "name": "singlepagedevrefresh",
-  "version": "1.1.1",
+  "version": "1.5.0",
   "description": "a node server for quick single page development",
   "main": "index.js",
   "files": [
