@@ -2,10 +2,9 @@ let http = require('http');
 let fs = require('fs');
 let chokidar = require('chokidar');
 let socket = require('socket.io');
+let path = require('path');
 
-const PORT = process.env.PORT || 8080;
-const FILEPATH = '.';
-const MAIN_HTML = 'index.html';
+
 const socketScripts = '\
 <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.1.1/socket.io.js"></script>\
 <script>\
@@ -29,9 +28,13 @@ function socketHTML(html){
   return htmlLines.join('');
 }
 
-module.exports = function(){
+function mainFun(Port, filePath, mainHTML){
+  let PORT = Port || process.env.PORT || 8080;
+  let FILEPATH = path.resolve(filePath || '.');
+  let MAIN_HTML = mainHTML || 'index.html';
+  let MAIN_HTML_PATH = `${FILEPATH}/${MAIN_HTML}`;
   // initialize the html to be cached here
-  indexHTML = socketHTML(fs.readFileSync(MAIN_HTML, 'utf-8'));
+  indexHTML = socketHTML(fs.readFileSync(MAIN_HTML_PATH, 'utf-8'));
   // create server first
   let server = http.createServer((req, res)=>{
     if(req.url == '/'){
@@ -39,7 +42,7 @@ module.exports = function(){
       res.end();
     }
     else {
-      let requestFile = req.url.substring(1);
+      let requestFile = `${FILEPATH}/${req.url.substring(1)}`;
       fs.readFile(requestFile, 'utf-8',(err, data)=>{
         if(err) return console.error('Error:', err);
         // res.writeHead(200, {'Content-Type': 'text/html','Content-Length':data.length});
@@ -51,10 +54,11 @@ module.exports = function(){
   // connect socket to server
   let io = socket(server);
   // start watching for changes
-  chokidar.watch(`${FILEPATH}`, {ignored: /(^|[\/\\])\../}).on('change', (path) => {
+  let watcher = chokidar.watch(FILEPATH, {ignored: /(^|[\/\\])\../})
+  watcher.on('change', (path) => {
       console.log(`Changed ${path}`);
-      if(path == MAIN_HTML){
-        fs.readFile(MAIN_HTML, 'utf-8', (err, data)=>{
+      if(path == MAIN_HTML_PATH){
+        fs.readFile(MAIN_HTML_PATH, 'utf-8', (err, data)=>{
           if(err) return console.error(('Error:', err));
           indexHTML = socketHTML(data);
           io.sockets.emit('file changed');
@@ -68,3 +72,5 @@ module.exports = function(){
     console.log(`Listening at ${PORT}`);
   });
 }
+
+module.exports = mainFun;

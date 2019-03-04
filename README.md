@@ -32,9 +32,5 @@ NOTE: There are still some things I need to add, like options for port, files to
 #### TODO:
 - hot module reload ?!?! (maybe not since this is meant to be straightforward)
 - ignore custom file
-- watch custom path
-- parameters should be added
-  - PORT
-  - FILEPATH
-  - MAIN_HTML
 - error check for readFileSync (in case file doesn't exist);
+- make custom socket or make socket.io for client local. this is to develop when not online
