@@ -41,9 +41,9 @@ Object for chokidar options: [check here for more info](https://github.com/paulm
 ### Some Basic examples with Parameters
 ```javascript
 // with different port
-require(`singlepagedevrefresh`)({Port: 1010});
+require(`singlepagedevrefresh`)({port: 1010});
 // with different port and different path
-require(`singlepagedevrefresh`)({Port: 1010, filePath: '/Users/josuerojasrojas/anotherdir'});
+require(`singlepagedevrefresh`)({port: 1010, filePath: '/Users/josuerojasrojas/anotherdir'});
 // ... and so on
 ```
 

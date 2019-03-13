@@ -30,7 +30,7 @@ function socketHTML(html){
 
 module.exports = function ({port, filePath, mainHTML, chokidarOptions} = {}){
   let OPTIONS = chokidarOptions || {ignored: /(^|[\/\\])\../};
-  let PORT = Port || process.env.PORT || 8080;
+  let PORT = port || process.env.PORT || 8080;
   let FILEPATH = path.resolve(filePath || '.');
   let MAIN_HTML = mainHTML || 'index.html';
   let MAIN_HTML_PATH = `${FILEPATH}/${MAIN_HTML}`;
